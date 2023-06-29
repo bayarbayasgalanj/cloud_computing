@@ -1,0 +1,38 @@
+Parameters:
+  EnvironmentName:
+    Description: An environment name such as dev, test, prod
+    Type: String
+    Default: "dev"
+
+Mappings:
+  InstanceTypeMap:
+    us-east-1:
+      dev: t2.nano
+      test: t2.nano
+      staging: t2.micro
+      prod: t2.micro
+    ap-southeast-2:
+      prod: t2.micro
+    ca-central-1:
+      prod: t2.micro
+
+Resources:
+  MyInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      ImageId: ami-0022f774911c1d690
+      SubnetId: subnet-0d51b7b78b588bd9f
+      InstanceType:
+        !FindInMap [InstanceTypeMap, !Ref "AWS::Region", !Ref EnvironmentName]
+
+Outputs:
+  VPC:
+    Description: Instance id
+    Value: !Ref MyInstance
+
+  InstancePrivateIp:
+    Value: !GetAtt MyInstance.PrivateIp
+
+  InstancePublicIp:
+    Value: !GetAtt MyInstance.PublicIp

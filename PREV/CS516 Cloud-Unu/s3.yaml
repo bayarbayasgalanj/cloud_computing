@@ -1,0 +1,27 @@
+Parameters:
+  env:
+    Description: An environment name that is prefixed to resource names
+    Type: String
+    Default: "dev"
+
+Resources:
+  MyBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "cloudformationbucket-${env}"
+      NotificationConfiguration:
+        TopicConfigurations:
+          - 
+            Event: "s3:ObjectCreated:*"
+            Topic:
+              Fn::ImportValue: "sns-DemoTopicArn"
+
+Outputs:
+  MyBucketName:
+    Value: !Ref MyBucket
+    Export: 
+      Name: !Sub "${AWS::StackName}-MyBucketName-${env}"
+  MyBucketArn:
+    Value: !GetAtt MyBucket.Arn
+    Export: 
+      Name: !Sub "${AWS::StackName}-MyBucketArn-${env}"

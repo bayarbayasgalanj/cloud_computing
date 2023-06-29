@@ -1,0 +1,29 @@
+Resources:
+  DemoTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: "DemoTopic"
+      Subscription:
+        - Endpoint: "utumenbayar@miu.edu"
+          Protocol: "email"
+  
+  DemoTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics: 
+        - !Ref DemoTopic
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Principal:
+              Service: "s3.amazonaws.com"
+            Effect: Allow
+            Action:
+              - 'SNS:Publish'
+            Resource: !Ref DemoTopic
+
+Outputs:
+  DemoTopicArn:
+    Value: !Ref DemoTopic
+    Export:
+      Name: !Sub "${AWS::StackName}-DemoTopicArn"
