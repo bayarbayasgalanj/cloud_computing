@@ -1,0 +1,8 @@
+aws elasticbeanstalk check-dns-availability --cname-prefix baysaacli2
+
+aws elasticbeanstalk create-application --application-name baysaa-app2
+aws elasticbeanstalk create-application-version --application-name baysaa-app2 --version-label v1 --source-bundle S3Bucket="elasticbeanstalk-us-east-1-878485317447",S3Key="nodejs.zip"
+
+aws elasticbeanstalk create-configuration-template --application-name baysaa-app2 --template-name v1 --solution-stack-name "64bit Amazon Linux 2 v5.8.2 running Node.js 18"
+aws elasticbeanstalk create-environment --cname-prefix baysaacli2 --application-name baysaa-app2 --template-name v1 --version-label v1 --environment-name v1clone --option-settings file://options.txt
+aws elasticbeanstalk describe-environments --environment-names baysaa-env2
