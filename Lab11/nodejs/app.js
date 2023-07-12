@@ -15,28 +15,28 @@ AWS.config.update({region: 'us-east-1'});
 var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 var docClient = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
-const paramsTable = {
-    TableName: 'Counter',
-    AttributeDefinitions: [
-        {
-            AttributeName: 'ID',
-            AttributeType: 'S'
-        }
-    ],
-    KeySchema: [
-        {
-            AttributeName: 'ID',
-            KeyType: 'HASH'
-        },
-    ],
-    ProvisionedThroughput: {
-        ReadCapacityUnits: 1,
-        WriteCapacityUnits: 1
-    },
-    StreamSpecification: {
-        StreamEnabled: false
-    }
-};
+// const paramsTable = {
+//     TableName: 'Counter',
+//     AttributeDefinitions: [
+//         {
+//             AttributeName: 'ID',
+//             AttributeType: 'S'
+//         }
+//     ],
+//     KeySchema: [
+//         {
+//             AttributeName: 'ID',
+//             KeyType: 'HASH'
+//         },
+//     ],
+//     ProvisionedThroughput: {
+//         ReadCapacityUnits: 1,
+//         WriteCapacityUnits: 1
+//     },
+//     StreamSpecification: {
+//         StreamEnabled: false
+//     }
+// };
 
 // ddb.createTable(paramsTable, function(err, data) {
 //     if (err) {
@@ -46,21 +46,21 @@ const paramsTable = {
 //     }
 // });
 
-const paramsItem = {
-    TableName: 'Counter',
-    Item: {
-        'ID': {S: 'requestCounter'},
-        'info': {M: {'callCounter': {N: '1'}}}
-    }
-};
+// const paramsItem = {
+//     TableName: 'Counter',
+//     Item: {
+//         'ID': {S: 'requestCounter'},
+//         'info': {M: {'callCounter': {N: '1'}}}
+//     }
+// };
 
-ddb.putItem(paramsItem, function(err, data) {
-    if (err) {
-        console.log("Error", err);
-    } else {
-        console.log("Success", data);
-    }
-});
+// ddb.putItem(paramsItem, function(err, data) {
+//     if (err) {
+//         console.log("Error", err);
+//     } else {
+//         console.log("Success", data);
+//     }
+// });
 
 const incrementCounter = function() {
     const paramsUpdate = {
