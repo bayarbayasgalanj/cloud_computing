@@ -8,8 +8,8 @@
 	<packaging>jar</packaging>
 
 	<parent>
-		<artifactId>enterprise-architecture</artifactId>
-		<groupId>cs544</groupId>
+		<artifactId>cloud_computing</artifactId>
+		<groupId>cs516</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<dependencies>
