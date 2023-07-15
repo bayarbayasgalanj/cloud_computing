@@ -11,15 +11,15 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/gameDb
-services:
-  auth:
-    host: localhost
-    port: 8080
-    context-path: /auth/
-  streaming:
-    host: localhost
-    port: 8082
-    context-path: /stream/
+# services:
+#   auth:
+#     host: localhost
+#     port: 8080
+#     context-path: /auth/
+#   streaming:
+#     host: localhost
+#     port: 8082
+#     context-path: /stream/
 #logging:
 #  level:
 #    root: DEBUG
