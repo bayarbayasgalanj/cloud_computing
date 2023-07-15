@@ -1,0 +1,122 @@
+version: '3.8'
+
+networks:
+  cs544:
+    external: true
+
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: cs544
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      cs544:
+        aliases:
+          - mysqldb
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:4.4
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: gameDb
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+    volumes:
+      - db1:/data/db
+#      - ./init-mongodb.sh:/docker-entrypoint-initdb.d/init-mongodb.sh:ro
+    networks:
+      cs544:
+        aliases:
+          - mongodb
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.9
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      cs544:
+        aliases:
+          - rabbitmq
+
+  auth-service:
+    container_name: auth-service
+    build: ./auth-service
+    image: cs544/auth-service:1.0-SNAPSHOT
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mysqldb
+    networks:
+      cs544:
+        aliases:
+          - auth-service
+
+  member-service:
+    container_name: member-service
+    build: ./member-service
+    image: cs544/member-service:1.0-SNAPSHOT
+    restart: on-failure
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - mongodb
+    networks:
+      cs544:
+        aliases:
+          - member-service
+
+  sport-service:
+    container_name: sport-service
+    build: ./sport-service
+    image: cs544/sport-service:1.0-SNAPSHOT
+    restart: on-failure
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - rabbitmq
+      - mongodb
+    networks:
+      cs544:
+        aliases:
+          - sport-service
+
+  streaming-service:
+    container_name: streaming-service
+    build: ./streaming-service
+    image: cs544/streaming-service:1.0-SNAPSHOT
+    restart: on-failure
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - rabbitmq
+    networks:
+      cs544:
+        aliases:
+          - streaming-service
+
+volumes:
+  db:
+  db1:

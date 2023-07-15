@@ -1,0 +1,30 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /member
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongodb/gameDb
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+services:
+  auth:
+    host: auth-service
+    port: 8080
+    context-path: /auth/
+  streaming:
+    host: sport-service
+    port: 8081
+    context-path: /sport/
+#logging:
+# level:
+#   root: DEBUG
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /api.html

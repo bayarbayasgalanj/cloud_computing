@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: sport-service
+  profiles:
+    active: local
