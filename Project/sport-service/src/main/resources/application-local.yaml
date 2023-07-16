@@ -29,5 +29,6 @@ springdoc:
   swagger-ui:
     path: /api.html
 aws:
+  region: us-east-1
   accessKeyId: AKIA5BPWCK57NEG64B7Z
   secretAccessKey: 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

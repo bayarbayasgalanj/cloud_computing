@@ -27,7 +27,9 @@ import java.util.Map;
 @Service
 public class SQSMessageListener {
 
-    private static final Region region = Region.US_EAST_1;
+    @Value("${aws.region}")
+    private String awsRegion;
+    private final Region region = Region.of(awsRegion);
     @Value("${aws.accessKeyId}")
     private String accessKeyId;
     @Value("${aws.secretAccessKey}")
