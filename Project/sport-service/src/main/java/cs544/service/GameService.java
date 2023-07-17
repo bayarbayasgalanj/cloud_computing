@@ -1,19 +1,18 @@
 package cs544.service;
 
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-import org.springframework.web.client.RestTemplate;
-
 import cs544.Sender;
 import cs544.dao.GameDao;
 import cs544.domain.Game;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Service
 @Transactional
@@ -21,15 +20,13 @@ import lombok.Setter;
 public class GameService {
     private MongoTemplate mongoTemplate;
     private final GameDao gameDao;
-    private final RestTemplate restTemplate;
     private final Sender rabbitMqSender;
     private Timer timer;
     private Game gameMain;
 
-    public GameService(GameDao gameDao, MongoTemplate mongoTemplate, RestTemplate restTemplate, Sender rabbitMqSender) {
+    public GameService(GameDao gameDao, MongoTemplate mongoTemplate, Sender rabbitMqSender) {
         this.gameDao = gameDao;
         this.mongoTemplate = mongoTemplate;
-        this.restTemplate = restTemplate;
         this.rabbitMqSender = rabbitMqSender;
     }
 

@@ -1,17 +1,19 @@
 package cs544;
 
+import cs544.service.LambdaInvoker;
 import cs544.service.SQSMessageListener;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class SQSMessageListenerTest {
+import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
+class LambdaInvokerTest {
     @Autowired
-    private SQSMessageListener listener;
+    private LambdaInvoker invoker;
     @Test
     void receiveAndProcessMessages() {
-//        listener.receiveAndProcessMessages();
+//        invoker.invokeLambdaFunction("testing");
     }
 }
