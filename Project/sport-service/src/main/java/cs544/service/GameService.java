@@ -1,6 +1,6 @@
 package cs544.service;
 
-import cs544.Sender;
+//import cs544.Sender;
 import cs544.dao.GameDao;
 import cs544.domain.Game;
 import lombok.Setter;
@@ -20,15 +20,14 @@ import java.util.TimerTask;
 public class GameService {
     private MongoTemplate mongoTemplate;
     private final GameDao gameDao;
-    private final Sender rabbitMqSender;
+//    private final Sender rabbitMqSender;
     private final LambdaInvoker lambdaInvoker;
     private Timer timer;
     private Game gameMain;
 
-    public GameService(GameDao gameDao, MongoTemplate mongoTemplate, Sender rabbitMqSender, LambdaInvoker lambdaInvoker) {
+    public GameService(GameDao gameDao, MongoTemplate mongoTemplate, LambdaInvoker lambdaInvoker) {
         this.gameDao = gameDao;
         this.mongoTemplate = mongoTemplate;
-        this.rabbitMqSender = rabbitMqSender;
         this.lambdaInvoker = lambdaInvoker;
     }
 

@@ -12,6 +12,6 @@ class SQSMessageListenerTest {
     private SQSMessageListener listener;
     @Test
     void receiveAndProcessMessages() {
-//        listener.receiveAndProcessMessages();
+        listener.receiveAndProcessMessages();
     }
 }

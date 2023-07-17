@@ -101,7 +101,7 @@ public class SQSMessageListener {
 //        thread.start();
     }
 
-    @Scheduled(fixedDelay = 5000)
+//    @Scheduled(fixedDelay = 5000)
     public void receiveAndProcessMessages() {
         while (true) {
             ReceiveMessageResponse receiveResponse = sqsClient.receiveMessage(receiveRequest);

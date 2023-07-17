@@ -81,7 +81,7 @@ public class GameRestController {
         return responseMap;
     }
 
-    @Tag(name = "setStart", description = "It is starting game also sending to RabbitMQ")
+    @Tag(name = "setStart", description = "It is starting game also sending to Message Queue")
     @PostMapping("/setStart")
     public String setStart(@RequestParam String token) {
         if (tokenServer.verifyToken(token)) {
