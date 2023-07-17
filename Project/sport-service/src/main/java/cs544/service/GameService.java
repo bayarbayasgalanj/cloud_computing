@@ -57,7 +57,7 @@ public class GameService {
             gameMain = game;
             gameMain.setDurationMinutes(save_dur);
 //            rabbitMqSender.sendMessage("stream_transfer_result", game.getGameResult());
-            lambdaInvoker.invokeLambdaFunction(game.getGameResult());
+            lambdaInvoker.sendMessage(game.getGameResult());
             return "UPDATED GAME SCORE" + game.toString();
         }
         return "Failed to score update";
@@ -88,7 +88,7 @@ public class GameService {
     public String setStopToLive(Game game, String token) {
         setGameStatus(game, "draft");
 //        rabbitMqSender.sendMessage("stream_transfer_result", game.getGameResult());
-        lambdaInvoker.invokeLambdaFunction(game.getGameResult());
+        lambdaInvoker.sendMessage(game.getGameResult());
         return "STOPPED";
     }
 
@@ -124,7 +124,7 @@ public class GameService {
                 String msg = gameMain.getGameResult();
                 gameMain.setDurationMinutes(gameMain.getDurationMinutes() - 1);
 //                rabbitMqSender.sendMessage("stream_transfer_result", msg);
-                lambdaInvoker.invokeLambdaFunction(msg);
+                lambdaInvoker.sendMessage(msg);
             }
         } else {
             if (timer != null) {

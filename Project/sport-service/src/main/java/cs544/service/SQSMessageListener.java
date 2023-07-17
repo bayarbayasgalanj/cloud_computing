@@ -1,6 +1,9 @@
 package cs544.service;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -33,6 +36,7 @@ public class SQSMessageListener {
     private String secretAccessKey;
     private SqsClient sqsClient;
     private static String queueUrl;
+    private ReceiveMessageRequest receiveRequest;
 
     @PostConstruct
     private void init() {
@@ -86,28 +90,34 @@ public class SQSMessageListener {
                 .attributes(queueAttributes)
                 .build();
         sqsClient.setQueueAttributes(setQueueAttributesRequest);
-    }
 
-    public void receiveAndProcessMessages() {
-
-        ReceiveMessageRequest receiveRequest = ReceiveMessageRequest.builder()
+        receiveRequest = ReceiveMessageRequest.builder()
                 .queueUrl(queueUrl)
                 .maxNumberOfMessages(10)
                 .waitTimeSeconds(20)
                 .build();
+//        Runnable runnable = this::receiveAndProcessMessages;
+//        Thread thread = new Thread(runnable);
+//        thread.start();
+    }
 
+    @Scheduled(fixedDelay = 5000)
+    public void receiveAndProcessMessages() {
         while (true) {
             ReceiveMessageResponse receiveResponse = sqsClient.receiveMessage(receiveRequest);
             for (Message message : receiveResponse.messages()) {
-                System.out.println("Message: " + message.body());
+                try {
+                    JSONObject obj = new JSONObject(message.body());
+                    System.out.println("Message: " + obj.getString("Message"));
+                } catch (JSONException e) {
+                    System.out.println("JSONException Message: " + e.getMessage());
+                }
                 deleteMessage(queueUrl, message.receiptHandle());
             }
         }
     }
 
-    private static void deleteMessage(String queueUrl, String receiptHandle) {
-        SqsClient sqsClient = SqsClient.builder().region(Region.US_EAST_1).build();
-
+    private void deleteMessage(String queueUrl, String receiptHandle) {
         DeleteMessageRequest deleteRequest = DeleteMessageRequest.builder()
                 .queueUrl(queueUrl)
                 .receiptHandle(receiptHandle)

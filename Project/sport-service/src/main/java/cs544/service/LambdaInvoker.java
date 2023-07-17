@@ -33,7 +33,7 @@ public class LambdaInvoker {
                 .build();
     }
 
-    public void invokeLambdaFunction(String message){
+    public void sendMessage(String message){
         // Create an InvokeRequest
         InvokeRequest request = InvokeRequest.builder()
                 .functionName(lambdaFunctionName)
