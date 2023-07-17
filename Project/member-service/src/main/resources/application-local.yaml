@@ -17,8 +17,8 @@ services:
     port: 8080
     context-path: /auth/
   streaming:
-    host: localhost
-    port: 172.31.94.13
+    host: 172.31.94.13
+    port: 8081
     context-path: /sport/
 springdoc:
   api-docs:
