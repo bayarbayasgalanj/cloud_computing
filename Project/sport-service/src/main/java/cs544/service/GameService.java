@@ -21,13 +21,15 @@ public class GameService {
     private MongoTemplate mongoTemplate;
     private final GameDao gameDao;
     private final Sender rabbitMqSender;
+    private final LambdaInvoker lambdaInvoker;
     private Timer timer;
     private Game gameMain;
 
-    public GameService(GameDao gameDao, MongoTemplate mongoTemplate, Sender rabbitMqSender) {
+    public GameService(GameDao gameDao, MongoTemplate mongoTemplate, Sender rabbitMqSender, LambdaInvoker lambdaInvoker) {
         this.gameDao = gameDao;
         this.mongoTemplate = mongoTemplate;
         this.rabbitMqSender = rabbitMqSender;
+        this.lambdaInvoker = lambdaInvoker;
     }
 
     public List<Game> getAll() {
@@ -54,7 +56,8 @@ public class GameService {
             System.out.println("save_dur"+save_dur);
             gameMain = game;
             gameMain.setDurationMinutes(save_dur);
-            rabbitMqSender.sendMessage("stream_transfer_result", game.getGameResult());
+//            rabbitMqSender.sendMessage("stream_transfer_result", game.getGameResult());
+            lambdaInvoker.invokeLambdaFunction(game.getGameResult());
             return "UPDATED GAME SCORE" + game.toString();
         }
         return "Failed to score update";
@@ -84,7 +87,8 @@ public class GameService {
 
     public String setStopToLive(Game game, String token) {
         setGameStatus(game, "draft");
-        rabbitMqSender.sendMessage("stream_transfer_result", game.getGameResult());
+//        rabbitMqSender.sendMessage("stream_transfer_result", game.getGameResult());
+        lambdaInvoker.invokeLambdaFunction(game.getGameResult());
         return "STOPPED";
     }
 
@@ -119,7 +123,8 @@ public class GameService {
             } else {
                 String msg = gameMain.getGameResult();
                 gameMain.setDurationMinutes(gameMain.getDurationMinutes() - 1);
-                rabbitMqSender.sendMessage("stream_transfer_result", msg);
+//                rabbitMqSender.sendMessage("stream_transfer_result", msg);
+                lambdaInvoker.invokeLambdaFunction(msg);
             }
         } else {
             if (timer != null) {
