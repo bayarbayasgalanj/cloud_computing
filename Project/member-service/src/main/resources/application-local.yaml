@@ -13,12 +13,12 @@ spring:
       uri: mongodb://localhost:27017/gameDb
 services:
   auth:
-    host: localhost
+    host: 172.31.80.81
     port: 8080
     context-path: /auth/
   streaming:
     host: localhost
-    port: 8081
+    port: 172.31.94.13
     context-path: /sport/
 springdoc:
   api-docs:
