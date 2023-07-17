@@ -10,7 +10,7 @@ management:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/gameDb
+      uri: mongodb://172.31.94.13:27017/gameDb
 services:
   auth:
     host: 172.31.81.163
