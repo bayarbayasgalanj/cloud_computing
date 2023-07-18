@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_login">
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.colworx.soccorapp.ui.login.LoginFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/navigation_member"
+        android:name="com.colworx.soccorapp.ui.member.MemberFragment"
+        android:label="@string/title_member"
+        tools:layout="@layout/fragment_member" />
+
+
+    <fragment
+        android:id="@+id/navigation_sport"
+        android:name="com.colworx.soccorapp.ui.sport.SportFragment"
+        android:label="@string/title_sport"
+        tools:layout="@layout/fragment_sport" />
+
+    <fragment
+        android:id="@+id/navigation_stream"
+        android:name="com.colworx.soccorapp.ui.stream.StreamFragment"
+        android:label="@string/title_stream"
+        tools:layout="@layout/fragment_stream" />
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="com.colworx.soccorapp.ui.setting.SettingFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_setting" />
+</navigation>

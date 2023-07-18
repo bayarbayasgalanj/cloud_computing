@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_login"
+        android:icon="@drawable/ic_login"
+        android:title="@string/title_login" />
+
+    <item
+        android:id="@+id/navigation_member"
+        android:icon="@drawable/ic_member"
+        android:title="@string/title_member" />
+
+    <item
+        android:id="@+id/navigation_sport"
+        android:icon="@drawable/ic_sport"
+        android:title="@string/title_sport" />
+
+    <item
+        android:id="@+id/navigation_stream"
+        android:icon="@drawable/ic_stream"
+        android:title="@string/title_stream" />
+
+
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/title_settings" />
+
+</menu>

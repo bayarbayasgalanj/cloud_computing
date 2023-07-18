@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_all"
+    tools:context=".ui.sport.SportFragment">
+
+    <Button
+        android:id="@+id/btnGetLiveGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Live Game"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <Button
+        android:id="@+id/btngetAllGames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get All Games"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <Button
+        android:id="@+id/btnStopGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Live Game"
+        app:layout_constraintTop_toBottomOf="@id/btnGetLiveGame"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <Button
+        android:id="@+id/btnStartGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@id/btnStopGame"
+        />
+
+    <Button
+        android:id="@+id/btnDeleteAllGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete All Game"
+        app:layout_constraintTop_toBottomOf="@id/btnStopGame"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <Button
+        android:id="@+id/btnAddGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Game"
+        app:layout_constraintTop_toBottomOf="@id/btnDeleteAllGame"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <Button
+        android:id="@+id/btntest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Api"
+        app:layout_constraintTop_toBottomOf="@id/btnStopGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+    <Button
+        android:id="@+id/btnSetScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Score"
+        app:layout_constraintTop_toBottomOf="@id/btntest"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnAddGame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

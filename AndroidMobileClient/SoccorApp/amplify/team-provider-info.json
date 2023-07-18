@@ -1,0 +1,86 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-soccergame-dev-23834-authRole",
+      "UnauthRoleArn": "arn:aws:iam::896553604990:role/amplify-soccergame-dev-23834-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::896553604990:role/amplify-soccergame-dev-23834-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-soccergame-dev-23834-deployment",
+      "UnauthRoleName": "amplify-soccergame-dev-23834-unauthRole",
+      "StackName": "amplify-soccergame-dev-23834",
+      "StackId": "arn:aws:cloudformation:us-east-2:896553604990:stack/amplify-soccergame-dev-23834/f01f8d70-2474-11ee-b767-0acc4e578b63",
+      "AmplifyAppId": "d2z3bjotxuwpw"
+    },
+    "categories": {
+      "auth": {
+        "soccergame19806ef4": {}
+      },
+      "storage": {
+        "soccerGame": {}
+      }
+    }
+  },
+  "soccergame": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-soccergame-soccergame-50147-authRole",
+      "UnauthRoleArn": "arn:aws:iam::896553604990:role/amplify-soccergame-soccergame-50147-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::896553604990:role/amplify-soccergame-soccergame-50147-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-soccergame-soccergame-50147-deployment",
+      "UnauthRoleName": "amplify-soccergame-soccergame-50147-unauthRole",
+      "StackName": "amplify-soccergame-soccergame-50147",
+      "StackId": "arn:aws:cloudformation:us-east-2:896553604990:stack/amplify-soccergame-soccergame-50147/f2170090-2488-11ee-bcd2-06c7098755f1",
+      "AmplifyAppId": "d2z3bjotxuwpw"
+    },
+    "categories": {
+      "auth": {
+        "soccergame19806ef4": {}
+      },
+      "storage": {
+        "soccerGame": {}
+      }
+    }
+  },
+  "soccerapp": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-soccergame-soccerapp-112818-authRole",
+      "UnauthRoleArn": "arn:aws:iam::896553604990:role/amplify-soccergame-soccerapp-112818-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::896553604990:role/amplify-soccergame-soccerapp-112818-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-soccergame-soccerapp-112818-deployment",
+      "UnauthRoleName": "amplify-soccergame-soccerapp-112818-unauthRole",
+      "StackName": "amplify-soccergame-soccerapp-112818",
+      "StackId": "arn:aws:cloudformation:us-east-2:896553604990:stack/amplify-soccergame-soccerapp-112818/f0844310-24be-11ee-8942-06d9ece46215",
+      "AmplifyAppId": "d2z3bjotxuwpw"
+    },
+    "categories": {
+      "auth": {
+        "soccergame19806ef4": {}
+      },
+      "storage": {
+        "soccerGame": {}
+      }
+    }
+  },
+  "amplifyapp": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-soccergame-amplifyapp-115925-authRole",
+      "UnauthRoleArn": "arn:aws:iam::896553604990:role/amplify-soccergame-amplifyapp-115925-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::896553604990:role/amplify-soccergame-amplifyapp-115925-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-soccergame-amplifyapp-115925-deployment",
+      "UnauthRoleName": "amplify-soccergame-amplifyapp-115925-unauthRole",
+      "StackName": "amplify-soccergame-amplifyapp-115925",
+      "StackId": "arn:aws:cloudformation:us-east-1:896553604990:stack/amplify-soccergame-amplifyapp-115925/49ebb1f0-24c3-11ee-87a8-0ef39ab144b3",
+      "AmplifyAppId": "d2874iim42w4sc"
+    },
+    "categories": {
+      "auth": {
+        "soccergame19806ef4": {}
+      },
+      "storage": {
+        "soccerGame": {}
+      }
+    }
+  }
+}
