@@ -44,26 +44,22 @@ public class SQSMessageListener {
                 .region(region)
                 .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKeyId, secretAccessKey)))
                 .build();
-
         sqsClient = SqsClient.builder()
                 .region(region)
                 .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKeyId, secretAccessKey)))
                 .build();
-
         // Create an SNS topic
         CreateTopicRequest createTopicRequest = CreateTopicRequest.builder()
                 .name("LiveScore")
                 .build();
         CreateTopicResponse createTopicResponse = snsClient.createTopic(createTopicRequest);
         String topicArn = createTopicResponse.topicArn();
-
         // Create two SQS queues
         CreateQueueRequest createQueueRequest = CreateQueueRequest.builder()
                 .queueName("Score")
                 .build();
         CreateQueueResponse createQueueResponse = sqsClient.createQueue(createQueueRequest);
         queueUrl = createQueueResponse.queueUrl();
-
         // Get the ARNs of the queues
         String queueArn = sqsClient.getQueueAttributes(GetQueueAttributesRequest.builder()
                         .queueUrl(queueUrl)
@@ -71,7 +67,6 @@ public class SQSMessageListener {
                         .build())
                 .attributes()
                 .get(QueueAttributeName.QUEUE_ARN);
-
         // Subscribe the queues to the SNS topic
         SubscribeRequest subscribeRequest1 = SubscribeRequest.builder()
                 .topicArn(topicArn)
@@ -79,7 +74,6 @@ public class SQSMessageListener {
                 .endpoint(queueArn)
                 .build();
         snsClient.subscribe(subscribeRequest1);
-
         // Set the SQS queue attributes to receive messages from SNS
         Map<QueueAttributeName, String> queueAttributes = new HashMap<>();
         queueAttributes.put(QueueAttributeName.RECEIVE_MESSAGE_WAIT_TIME_SECONDS, "20");
@@ -90,30 +84,24 @@ public class SQSMessageListener {
                 .attributes(queueAttributes)
                 .build();
         sqsClient.setQueueAttributes(setQueueAttributesRequest);
-
         receiveRequest = ReceiveMessageRequest.builder()
                 .queueUrl(queueUrl)
                 .maxNumberOfMessages(10)
                 .waitTimeSeconds(20)
                 .build();
-//        Runnable runnable = this::receiveAndProcessMessages;
-//        Thread thread = new Thread(runnable);
-//        thread.start();
     }
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 1000)
     public void receiveAndProcessMessages() {
-        while (true) {
-            ReceiveMessageResponse receiveResponse = sqsClient.receiveMessage(receiveRequest);
-            for (Message message : receiveResponse.messages()) {
-                try {
-                    JSONObject obj = new JSONObject(message.body());
-                    System.out.println("Message: " + obj.getString("Message"));
-                } catch (JSONException e) {
-                    System.out.println("JSONException Message: " + e.getMessage());
-                }
-                deleteMessage(queueUrl, message.receiptHandle());
+        ReceiveMessageResponse receiveResponse = sqsClient.receiveMessage(receiveRequest);
+        for (Message message : receiveResponse.messages()) {
+            try {
+                JSONObject obj = new JSONObject(message.body());
+                System.out.println("Message: " + obj.getString("Message"));
+            } catch (JSONException e) {
+                System.out.println("JSONException Message: " + e.getMessage());
             }
+            deleteMessage(queueUrl, message.receiptHandle());
         }
     }
 
